@@ -1,6 +1,5 @@
 <?php
 
-
 /* Crea un array indexeado de temperaturas y devuelve el array con todos sus valores ingresados
 *@param INT $num
 *@return ARRAY 
@@ -18,6 +17,8 @@ function leerTemperaturas ($num){
 return $arrayTemps;
 }
 // Almacena tipo de datos ENTEROS 
+
+
 
 
 /* Dado un array, lista los elementos a pantalla mediante un echo
@@ -94,11 +95,11 @@ function maxTemperatura ($tempsMax) {
     return $maxTemp;
 }
 
-function extremosTemperatura($temperaturas) {
+function extremosTemperatura($tempsMinMax) {
     $tempExtremas = array();
 
-    $tempsExtremas["min"] = min($temperaturas); // con la funcion min de php buscamos en este caso, la temperatura (o el int) mas bajo dentro del array $temperaturas
-    $tempsExtremas["max"] = max($temperaturas); // con la funcion max de php buscamos en este caso, la temperatura (o el int) mas alta dentro del array $temperaturas
+    $tempsExtremas["min"] = min($tempsMinMax); // con la funcion min de php buscamos en este caso, la temperatura (o el int) mas bajo dentro del array $$tempsMinMax (originalmente $temperaturas)
+    $tempsExtremas["max"] = max($tempsMinMax); // con la funcion max de php buscamos en este caso, la temperatura (o el int) mas alta dentro del array $$tempsMinMax (originalmente $temperaturas)
 
     return $tempsExtremas;
 }
