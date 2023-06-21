@@ -1,0 +1,127 @@
+<?php
+
+
+/* Crea un array indexeado de temperaturas y devuelve el array con todos sus valores ingresados
+*@param INT $num
+*@return ARRAY 
+*/
+function leerTemperaturas ($num){
+
+    $arrayTemps = array();
+
+    for ($i=0; $i < $num; $i++) {
+        echo "Ingrese la temperatura: "; 
+        $arrayTemps[$i] = trim(fgets(STDIN));
+        
+    }
+
+return $arrayTemps;
+}
+// Almacena tipo de datos ENTEROS 
+
+
+/* Dado un array, lista los elementos a pantalla mediante un echo
+*@param ARRAY $temperaturas
+*@return 
+*/
+function listarTemperaturas ($tempListado){
+    foreach ($tempListado as $elemento) {  
+        echo $elemento."\n";
+    }
+}
+// Realizamos un recorrido exhaustivo para imprimir con echo cada temperatura del array 
+
+
+
+
+/* Dado un array, sumamos los elementos dentro del array y devolvemos el promedio 
+*@param ARRAY $tempsPromedio
+*@return FLOAT
+*/
+function promTemperaturas ($tempsPromedio){
+// $sumaTemps, $totalTemps, $promedio
+
+$sumaTemps = 0;
+$totalTemps = count($tempsPromedio); // Evito el contador en el foreach con esta funcion
+
+    foreach($tempsPromedio as $indice => $elemento){
+        //$sumaTemps = array_sum($tempsPromedio); es lo mismo que la formula de abajo?
+        $sumaTemps = $sumaTemps + $elemento;
+    }
+    $promedio = $sumaTemps / $totalTemps;
+
+return $promedio;
+}
+
+function porcTemperaturasSuperiores($tempsTotales, $tempDeterminadaUser){
+    $totalTempsPorcentaje = count($tempsTotales);
+    $tempsMayores = 0;
+
+         foreach ($tempsTotales as $key => $value) { //$key = indice y $value = $elemento??
+             if ($value > $tempDeterminadaUser){  // aca comparamos $value que seria lo mismo que elemento como veniamos haciendo en otras funciones $value = $elemento
+                $tempsMayores = $tempsMayores + 1;
+            }
+    }
+    $porcentaje = ($tempsMayores / $totalTempsPorcentaje) * 100; 
+
+return $porcentaje;
+}
+
+
+
+
+function minTemperatura ($tempsMin) {
+    
+    $selectora = 9999;
+    foreach($tempsMin as $indice => $elemento){
+       if ($selectora > $elemento){
+            $minTemp = $elemento;
+            $selectora = $elemento;
+       }
+    }
+    return $minTemp;
+}
+
+function maxTemperatura ($tempsMax) {
+    
+    $selectora = -1;
+    foreach($tempsMax as $indice => $elemento){
+       if ($selectora < $elemento){
+            $maxTemp = $elemento;
+            $selectora = $elemento;
+       }
+    }
+    return $maxTemp;
+}
+
+function extremosTemperatura($temperaturas) {
+    $tempExtremas = array();
+
+    $tempsExtremas["min"] = min($temperaturas); // con la funcion min de php buscamos en este caso, la temperatura (o el int) mas bajo dentro del array $temperaturas
+    $tempsExtremas["max"] = max($temperaturas); // con la funcion max de php buscamos en este caso, la temperatura (o el int) mas alta dentro del array $temperaturas
+
+    return $tempsExtremas;
+}
+
+/*Principal */
+
+echo "Determine la cantidad de temperaturas que va a ingresar: ";
+$cantTemperaturas = trim(fgets(STDIN));
+echo "Ingrese una temperatura determinada para saber el porcentaje de temperaturas que superaron la misma: ";
+$tempDeterminada = trim(fgets(STDIN));
+
+$temperaturas = leerTemperaturas($cantTemperaturas);
+
+echo "Temperaturas ingresadas:";
+listarTemperaturas($temperaturas);
+
+$porcentajeTemp = porcTemperaturasSuperiores($temperaturas, $tempDeterminada);
+echo "El porcentaje de temperaturas por arriba de: ".$tempDeterminada."fue de: ".$porcentajeTemp."%"."\n";
+
+$promedioTemps = promTemperaturas($temperaturas);
+echo "El promedio de temperaturas es:".$promedioTemps."\n";
+
+$minimaTemp = minTemperatura($temperaturas);
+echo "La temperatura minima registrada fue: ".$minimaTemp."\n";
+$maximaTemp = maxTemperatura($temperaturas);
+echo "La temperatura maxima registrada fue: ".$maximaTemp."\n";
